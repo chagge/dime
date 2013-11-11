@@ -39,11 +39,5 @@ $config['database'] = array(
     //  and you'll need to make a special one just for your
     //  buddy Dime. Again, something your webhost can sort out
     //  for you. Ain't your webhost great, huh?
-    'name' => 'dime',
-    
-    //  Nothing to do with ships, but still pretty important.
-    //  Tells us where your database is being served. It's
-    //  99% certain this won't change, but if your webhost
-    //  has a separate port, you can change it here. 
-    'port' => 3306
+    'name' => 'dime'
 );

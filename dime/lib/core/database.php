@@ -16,26 +16,37 @@
  *   but I can tell you that it's mad cool.
  */
 class Database {
-    private static $connection = false;
+    private $connection = false;
     
+    /**
+     *   Set up a connection to the database
+     *   Oh, and store it to the Config class for handiness.
+     *
+     *   You probably don't need to use this, all the other
+     *   methods check first.
+     */
     public static function connect() {
         //  Get our DB info
         $config = Config::file('database');
         
-        self::$connection = new mysqli(
+        Config::set('connection', new mysqli(
             $config['host'],
             $config['username'],
             $config['password'],
             $config['name']
-        );
+        ));
     }
     
+    /**
+     *   Run a query against the database
+     *   Just a nicer looking version of mysql_query, I guess.
+     */
     public static function query($wut) {
-        if(self::$connection === false) {
+        if(Config::file('connection', false) === false) {
             self::connect();
         }
         
-        $query = self::$connection->query($wut);
+        $query = Config::file('connection')->query($wut);
         $result = array();
         
         while($row = $query->fetch_object()) {
@@ -47,10 +58,18 @@ class Database {
         return $result;
     }
     
+    /**
+     *   Get all the records from a specific table
+     *
+     *   Database::all('config'); // -> all my permanent config data
+     */
     public static function all($table) {
         return self::query('select * from `'. self::escape($table) . '`');
     }
     
+    /**
+     *   Tidy something up to use in a database query
+     */
     private static function escape($str, $stripHTML = false, $filter = FILTER_SANITIZE_STRING) {
         $str = htmlentities(filter_var($str, $filter));
         
