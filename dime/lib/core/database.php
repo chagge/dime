@@ -16,8 +16,6 @@
  *   but I can tell you that it's mad cool.
  */
 class Database {
-    private $connection = false;
-    
     /**
      *   Set up a connection to the database
      *   Oh, and store it to the Config class for handiness.

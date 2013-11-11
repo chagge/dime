@@ -279,12 +279,21 @@ form {
     font-weight: bold;
     text-transform: uppercase;
 }
+    .checker.error {
+        color: #d36843;
+        background-position: 0 -40px;
+    }
+    .checker.success {
+        color: #95c331;
+        background-position: 0 -80px;
+    }
     .checker.spinner {
         padding: 0;
         overflow: hidden;
 
         width: 40px;
         height: 40px;
+        margin-left: -8px;
         
         background-position: 8px 0;
 

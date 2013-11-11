@@ -60,7 +60,11 @@ $(function() {
     listen('database', function() {
         var fields = $('#database input');
         var passed = {};
-        var check = function(field, data) {
+        var check = function() {
+            var me = $(this);
+            var field = me.attr('id');
+            var data = me.val();
+            
             var checks = {
                 host: function(data) {
                     $.ajax({
@@ -70,31 +74,55 @@ $(function() {
                             if(res.statusText[0] !== 4 || res.statusText[0] !== 5) {
                                 return passed['host'] = true;
                             }
+                            
+                            passed['host'] = false;
                         }
                     });
                 },
                 
-                name: function(data) {
+                username: function(data) {
                     if(data.length > 0 && data.length <= 16) {
-                        return passed['name'] = true;
+                        return passed['username'] = true;
                     }
+                    
+                    passed['username'] = false;
                 },
                 
                 password: function(data) {
                     //  Nothing to validate, they can even be empty.
                     //  Damn passwords.
                     return passed['password'] = true;
+                },
+                
+                name: function(data) {
+                    if(data.length > 0) {
+                        return passed['name'] = true;
+                    }
                 }
             };
             
             if(checks[field] && typeof passed[field] == 'undefined') {
                 checks[field](data);
             }
+            
+            //  Check every second for working database
+            var interval = setInterval(function() {
+                var good = 0;
+                $.each(passed, function(a,b,c) {
+                    if(b == true) good++;
+                });
+                
+                if(good > 3) {
+                    $.ajax({
+                        url: 'checkDatabase',
+                        complete: function(data) {
+                            console.log(data);
+                        }
+                    });
+                }
+            }, 1000);
         };
         
-        fields.keyup(function() {
-            var me = $(this);
-            check(me.attr('id'), me.val());
-        });
+        fields.each(check).keyup(check);
     });
 });

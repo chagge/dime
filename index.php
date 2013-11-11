@@ -46,7 +46,7 @@ if(version_compare(phpversion(), REQUIRED_PHP_VERSION) < 0) {
 //  Just try and work out where we are on the site
 //  Some folks use subfolders, some don't. We cool with
 //  all you guys.
-define('ROOT', dirname($_SERVER['SCRIPT_FILENAME']) . '/');
+define('ROOT', dirname(__FILE__) . '/');
 
 //  This one's to use publicly. Like
 //  echo '<img src="' . BASE . 'assets/logo.png">
