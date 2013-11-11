@@ -29,6 +29,32 @@ class Input {
     }
     
     /**
+     *   This is used to handle $_SERVER calls.
+     *
+     *   Input::server('request_uri');
+     */
+    public static function server($param, $filter = FILTER_SANITIZE_STRING) {
+        $aliases = array(
+            'uri' => 'request_uri',
+            'self' => 'php_self',
+            'name' => 'server_name',
+            'request' => 'request_method',
+            'host' => 'http_host',
+            'referrer' => 'http_referer',
+            'ua' => 'user_agent'
+        );
+        
+        return filter_input(INPUT_SERVER, strtoupper($param), $filter);
+    }
+    
+    /**
+     *   Is the current server HTTPS? Simple.
+     */
+    public static function https() {
+        return !!self::server('https');
+    }
+    
+    /**
      *   Just grab whatever we can take. If there's $_GET,
      *   use that. If not, fall back to $_POST.
      *

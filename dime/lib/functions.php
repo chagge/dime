@@ -11,3 +11,24 @@ function load_dir($dir) {
         include_once $file;
     }
 }
+
+/**
+ *   Fallback
+ *   Death to if() { } else { } statements everywhere
+ *   Except in this function, of course.
+ */
+function fallback($a, $b) {
+    if($a) {
+        if(is_array($a)) {
+            foreach($a as $find => $in) {
+                if(isset($in[$find])) return $in[$find];
+            }
+            
+            return $b;
+        }
+        
+        return $a;
+    }
+    
+    return $b;
+}

@@ -19,7 +19,7 @@ include_once ROOT . 'dime/lib/functions.php';
 //  Require the core files we need for now
 //  It's not automated in case some hackers tries to
 //  add naughty files. Bloody hackers.
-foreach(array('config', 'database', 'route', 'url', 'response') as $file) {
+foreach(array('config', 'database', 'route', 'input', 'url', 'response') as $file) {
     include_once ROOT . 'dime/lib/core/' . $file . '.php';
 }
 
@@ -27,7 +27,7 @@ foreach(array('config', 'database', 'route', 'url', 'response') as $file) {
 Config::setup() and Config::load();
 
 //  Are we installed?
-if(Config::get('sitename', false) !== false) {
+if(Config::get('sitename', false) === false) {
     Response::redirect(BASE . 'install');
 }
 

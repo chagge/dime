@@ -2,18 +2,23 @@
 
 class Url {
 
+    public static $default = 'index';
+    public static $current = false;
+    public static $base = false;
+
 	public static function current($stripBase = true) {
-		//  ALL IN UPPERCASE
-		$current = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
+	    if(!self::$current) {
+	        self::detect();
+	    }
+	    
+	    return self::$current;
+	}
+	
+	private static function detect() {
+	    //  Get the URL
+		self::$current = Input::server('REQUEST_URI');
 		
-		//  Strip the base path out
-		if($stripBase === true) {
-			$current = preg_replace('#' . PUBLIC_PATH . '#', '', $current, 1);
-		}
-		
-		//  Stop any stupid amount of slashes
-		//  http://your.app/index//////testing// works the same as http://your.app/index/testing now
-		$current = preg_replace('/[\/]+/', '/', $current);
+		self::$current = preg_replace('/[\/]+/', '/', $current);
 		
 		//  Strip off the last character, if it's a slash
 		if(substr($current, -1) === '/') {
@@ -39,14 +44,10 @@ class Url {
 		$segments = explode('/', self::request());
 		
 		//  Return our segments
-		$seg = (isset($segments[$which]) and !empty($segments[$which])) ? $segments[$which] : Config::get('default_method');
+		$seg = (isset($segments[$which]) and !empty($segments[$which])) ? $segments[$which] : self::$default;
 		
 		//  If we have a segment, and it's not an index page, give it back
-		if($seg) {
-			return $seg;
-		}
-	
-		return $fallback;
+		return fallback($seg, $fallback);
 	}
 	
 	public static function stripTags($segment) {
