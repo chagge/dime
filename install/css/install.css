@@ -27,18 +27,30 @@ h1 {
     font-weight: 400;
     
     color: #6f685a;
+    
+    -webkit-transition: opacity .25s;
+    -moz-transition: opacity .25s;
+    transition: opacity .25s;
 }
+
+#global, .wrapper {
+    display: block;
+    width: 560px;
+}
+    #global {
+        display: none;
+        margin: 50px auto;
+    }
 
 .wrapper {
     position: absolute;
     left: 50%;
     top: 50%;
     
-    width: 560px;
     margin-left: -280px;
 }
-    header {
-        overflow: hidden;
+    section nav {
+        display: none;
     }
         header ul {
             float: right;
@@ -83,6 +95,9 @@ h1 {
             header li:last-child {
                 margin-right: 0;
             }
+                header li:last-child:after {
+                    display: none;
+                }
     footer {
         margin-top: 5px;
         min-height: 40px;
@@ -279,7 +294,7 @@ form {
     font-weight: bold;
     text-transform: uppercase;
 }
-    .checker.error {
+    .checker.failure {
         color: #d36843;
         background-position: 0 -40px;
     }

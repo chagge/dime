@@ -9,9 +9,25 @@
         <script src="../dime/assets/zepto.js"></script>
         <script src="js/listen.js"></script>
         <script src="js/install.js"></script>
+
+        <script src="js/database.js"></script>
+        <script src="js/metadata.js"></script>
+        <script src="js/account.js"></script>
     </head>
     <body>
-        <section id="intro" class="wrapper">
+        <noscript>
+            turn on your javascript, the internet will be a nicer place for it
+        </noscript>
+        
+        <header id="global">
+            <nav>
+                <img class="logo" src="img/logo.png" alt="Dime" title="Dime logo">
+                <ul role="progress"></ul>
+            </nav>
+            <h1></h1>
+        </header>
+        
+        <section id="intro" class="wrapper" style="margin-top: -127.5px !important;">
             <header>
                 <img class="logo" src="img/logo.png" alt="Dime" title="Dime logo">
                 
@@ -30,24 +46,26 @@
             </footer>
         </section>
         
-        <section id="database" class="wrapper" style="left: 150%;">
+        <section id="database" class="wrapper">
             <header>
-                <img class="logo" src="img/logo.png" alt="Dime" title="Dime logo">
-                
-                <ul role="progress">
-                    <li class="current">Database</li>
-                    <li>Metadata</li>
-                    <li>Account</li>
-                    <li>Done</li>
-                </ul>
+                <nav>
+                    <img class="logo" src="img/logo.png" alt="Dime" title="Dime logo">
+                    
+                    <ul role="progress">
+                        <li class="current">Database</li>
+                        <li>Metadata</li>
+                        <li>Account</li>
+                        <li>Done</li>
+                    </ul>
+                </nav>
                 
                 <h1>Alright. What’s your database info?</h1>
             </header>
             
             <form>
                 <p>
-                    <input name="host" id="host" value="localhost" placeholder="localhost">
-                    <label for="host">Database host</label>
+                    <input name="db_host" id="db_host" value="localhost" placeholder="localhost">
+                    <label for="db_host">Database host</label>
                 </p>
                 <p>
                     <input name="username" id="username" value="root" placeholder="root">
@@ -65,8 +83,43 @@
                 
                 <footer>
                     <span class="checker spinner">Checking database, hold on…</span>
-                    <span class="checker success">Database connected fine. Nice job!</span>
                     <button class="btn secondary arrow" disabled href="#metadata">All done, next step</button>
+                </footer>
+            </form>
+        </section>
+        
+        <section id="metadata" class="wrapper">
+            <header>
+                <nav>
+                    <img class="logo" src="img/logo.png" alt="Dime" title="Dime logo">
+                    
+                    <ul role="progress">
+                        <li class="elapsed">Database</li>
+                        <li class="current">Metadata</li>
+                        <li>Account</li>
+                        <li>Done</li>
+                    </ul>
+                    </nav>
+                
+                <h1>Nice one! Tell me a bit about your shop.</h1>
+            </header>
+            
+            <form>
+                <p>
+                    <input name="db_host" id="db_host" value="localhost" placeholder="localhost">
+                    <label for="db_host">Database host</label>
+                </p>
+                <p>
+                    <input name="username" id="username" value="root" placeholder="root">
+                    <label for="username">Username</label>
+                </p>
+                <p>
+                    <input name="password" id="password" type="password" value="">
+                    <label for="password">Password</label>
+                </p>
+                
+                <footer>
+                    <button class="btn arrow" href="#metadata">All done, next step</button>
                 </footer>
             </form>
         </section>

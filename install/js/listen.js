@@ -17,16 +17,13 @@
  *   listen('alright stop collaborate and'); // -> ice is back!
  */
 
+callbacks = {};
 function listen(panel, callback) {
     //  Add callback to the register
     if(callback) {
-        if(!this.callbacks) {
-            this.callbacks = [];
-        }
-        
-        return this.callbacks[panel] = callback;
+        return callbacks[panel] = callback;
     }
     
     //  And call back when it's "activated"
-    $.isFunction(this.callbacks[panel]) && this.callbacks[panel]();
+    $.isFunction(callbacks[panel]) && callbacks[panel]();
 };
