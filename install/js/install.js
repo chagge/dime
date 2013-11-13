@@ -31,28 +31,24 @@ $(function() {
      *   Slidey slidey!
      */
     var arrow = $('.arrow');
-    var global = $('#global');
-    
+    var header = $('#global').addClass('hidden');
+        
     arrow.click(function() {
         var panel = $(this).parents('.wrapper');
         var next = panel.next();
+        var id = next.attr('id');
         
         if(!next.length) {
             return true;
         }
         
-        if(global.css('display') !== 'block') {
-            setTimeout(function() {
-                global.show().css({opacity: 0, position: 'relative', top: -100}).animate({
-                    opacity: 1,
-                    top: 0
-                }, 200);
-            }, 500);
-        }
+        header.removeClass('hidden')
+              .find('.' + next.attr('id')).addClass('current')
+              .prev().removeClass('current').addClass('elapsed');
         
         next.animate({left: '50%'}, 1000, easing, function() {
-            global.children('nav').html(next.find('nav').html());
-            listen(next.attr('id'));
+            next.find('input').first().focus();
+            listen(id);
         });
         
         setTimeout(function() {

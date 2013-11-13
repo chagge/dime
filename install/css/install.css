@@ -14,7 +14,7 @@ body {
     color: #938d82;
 }
 
-body, input, textarea, button {
+body, input, textarea, button, select {
     font: 16px/25px Gotham, "Proxima Nova", Avenir, "Trebuchet MS", sans-serif;
 }
 
@@ -38,9 +38,17 @@ h1 {
     width: 560px;
 }
     #global {
-        display: none;
+        position: relative;
         margin: 50px auto;
+        
+        -webkit-transition: opacity, top .2s ease-in-out .45s;
+        -moz-transition: opacity, top .2s ease-in-out .45s;
+        transition: opacity, top .2s ease-in-out .45s;
     }
+        #global.hidden {
+            top: -80px;
+            opacity: 0;
+        }
 
 .wrapper {
     position: absolute;
@@ -49,59 +57,68 @@ h1 {
     
     margin-left: -280px;
 }
-    section nav {
-        display: none;
+    header ul {
+        float: right;
+        pointer-events: none;
     }
-        header ul {
-            float: right;
-            pointer-events: none;
+        header li {
+            display: block;
+            float: left;
+            padding: 5px 12px 3px;
+            margin-right: 30px;
+            
+            position: relative;
+            list-style: none;
+            
+            font-size: 10px;
+            line-height: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            
+            color: #c2bba8;
+            border: 2px solid #ddd9c7;
+            border-radius: 40px;
+            
+            -webkit-transition: color .2s, background .2s, border .2s;
+            -moz-transition: color .2s, background .2s, border .2s;
+            transition: color .2s, background .2s, border .2s;
         }
-            header li {
+            header li.current {
+                background: #bdbaac;
+                color: #fff;
+                border-color: #bdbaac;
+            }
+            header li.elapsed {
+                background: #eeece3;
+                color: #b8b29a;
+                border-color: #d7d2bd;
+            }
+            header li:after {
+                content: '';
+                position: absolute;
+                right: -32px;
+                top: 50%;
+                
                 display: block;
-                float: left;
-                padding: 5px 12px 3px;
-                margin-right: 30px;
+                width: 30px;
+                height: 2px;
+                margin-top: -1px;
                 
-                position: relative;
-                list-style: none;
-                
-                font-size: 10px;
-                line-height: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
-                
-                color: #c2bba8;
-                border: 2px solid #e5e2d3;
-                border-radius: 40px;
+                background: #e5e2d3;
             }
-                header li.current {
-                    background: #bdbaac;
-                    color: #fff;
-                    border-color: #bdbaac;
-                }
-                header li:after {
-                    content: '';
-                    position: absolute;
-                    right: -32px;
-                    top: 50%;
-                    
-                    display: block;
-                    width: 30px;
-                    height: 2px;
-                    margin-top: -1px;
-                    
-                    background: #e5e2d3;
-                }
-            header li:last-child {
-                margin-right: 0;
+        header li:last-child {
+            margin-right: 0;
+        }
+            header li:last-child:after {
+                display: none;
             }
-                header li:last-child:after {
-                    display: none;
-                }
     footer {
-        margin-top: 5px;
+        padding-top: 20px;
         min-height: 40px;
     }
+        #intro footer {
+            padding-top: 5px;
+        }
 
 .logo {
     display: block;
@@ -129,9 +146,9 @@ form {
     }
         form p.spaced {
             clear: both;
-            margin: 40px 0;
+            margin: 40px 0 20px;
         }
-    input {
+    input, textarea, select {
         display: block;
         width: 100%;
         padding: 10px 20px 10px 170px;
@@ -143,6 +160,19 @@ form {
         border: none;
         border-radius: 4px;
     }
+        textarea {
+            resize: vertical;
+            max-height: 100px;
+        }
+        select {
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            
+            background-image: url('../img/arrow.png');
+            background-repeat: no-repeat;
+            background-position: 100% 50%;
+        }
         ::-webkit-input-placeholder {
             color: #bdb9ad;
         }
@@ -195,6 +225,8 @@ form {
     
     color: #fff;
     background: #95c331;
+    
+    outline: none;
 }
     .btn[disabled] {
         cursor: not-allowed;

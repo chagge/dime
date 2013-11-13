@@ -19,7 +19,7 @@ include_once ROOT . 'dime/lib/functions.php';
 //  Require the core files we need for now
 //  It's not automated in case some hackers tries to
 //  add naughty files. Bloody hackers.
-foreach(array('config', 'database', 'route', 'input', 'url', 'response') as $file) {
+foreach(array('config', 'database', 'route', 'input', 'url', 'response', 'payment') as $file) {
     include_once ROOT . 'dime/lib/core/' . $file . '.php';
 }
 
