@@ -45,12 +45,18 @@ class Route {
      *       echo $url;
      *   });
      */
-    public static function get($route, $callback, $not_found = false) {
-        return self::match(Url::current(), self::parse($route), $callback, $not_found);
+    public static function get($route, $callback) {
+        return self::match(Url::current(), self::parse($route), $callback);
     }
     
-    public static function post($route, $callback) {}
-    public static function any($route, $callback) {}
+    /**
+     *   @todo actually make this do something
+     */
+    public static function post($route, $callback) {
+        if($post = Input::post($route)) {
+            return self::match($post, self::parse($route), $callback);
+        }
+    }
     
     public static function not_found($wut, $route = false) {
         //  Handle registering a not_found call
@@ -85,7 +91,7 @@ class Route {
     /**
      *   The nitty-gritty
      */
-    public static function match($url, $route, $callback, $not_found) {
+    public static function match($url, $route, $callback) {
         //  Some things in PHP are just plain ugly.
         //  This is one of them.
         preg_match('#^' . $route . '$#', $url, $matches);
@@ -97,10 +103,5 @@ class Route {
         }
         
         return Route::not_found($url, $route);
-        //return Response::redirect(BASE . fallback($not_found, self::$not_found));
-    }
-    
-    public static function __callStatic($name, $args) {
-        echo $name . ' args ' . $args;
     }
 }
