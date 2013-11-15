@@ -32,3 +32,4 @@ if(Config::get('sitename', false) === false) {
 }
 
 //  Run the routes
+load_all(ROOT . 'dime/routes/*.php');

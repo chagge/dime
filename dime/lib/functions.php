@@ -4,9 +4,9 @@
 /**
  *   Load every file in a directory. Simple, really.
  *
- *   load_dir(BASE . 'lib/core/*.php');
+ *   load_all(BASE . 'lib/core/*.php');
  */
-function load_dir($dir) {
+function load_all($dir) {
     foreach(glob($dir) as $file) {
         include_once $file;
     }

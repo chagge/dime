@@ -18,14 +18,14 @@ class Url {
 	    //  Get the URL
 		self::$current = Input::server('REQUEST_URI');
 		
-		self::$current = preg_replace('/[\/]+/', '/', $current);
+		self::$current = preg_replace('/[\/]+/', '/', self::$current);
 		
 		//  Strip off the last character, if it's a slash
-		if(substr($current, -1) === '/') {
-			$current = substr($current, 0, strlen($current) - 1);
+		if(substr(self::$current, -1) === '/') {
+			self::$current = substr(self::$current, 0, strlen(self::$current) - 1);
 		}
 		
-		return $current;
+		return self::$current;
 	}
 	
 	public static function request($stripBase = true) {

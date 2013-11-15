@@ -2,8 +2,9 @@
 
 /**
  *
- */
- 
-Route::get('(:any)', function($url) {
-    echo $url;
+ */ 
+
+Route::get('(:index)', function($url) {
+    //Template::load('index');
+    echo 'here we are';
 });

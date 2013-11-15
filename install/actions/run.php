@@ -1,5 +1,9 @@
 <?php 
 
+if(Config::get('sitename', false) !== false) {
+//    Response::redirect('../');
+}
+
 include_once 'functions.php';
 
 listen('checkDatabase', function() {
